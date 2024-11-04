@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tots_test/src/ui/common/util/app_color.dart';
 import 'package:tots_test/src/ui/common/util/assets.dart';
+import 'package:tots_test/src/ui/common/util/responsive.dart';
 import 'package:tots_test/src/ui/common/widgets/custom_button.dart';
 import 'package:tots_test/src/ui/dialogs/info_dialog.dart';
 import 'package:tots_test/src/ui/routes/routes.dart';
@@ -30,6 +31,7 @@ class _LoginFormularyState extends State<LoginFormulary> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = Responsive(context);
     return ChangeNotifierProvider(
       create: (context) => AuthController(),
       builder: (context, child) {
@@ -42,6 +44,7 @@ class _LoginFormularyState extends State<LoginFormulary> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(AppAssets.logo),
+                SizedBox(height: responsive.hp(7)),
                 const Text(
                   'LOG IN',
                   style: TextStyle(
@@ -49,6 +52,7 @@ class _LoginFormularyState extends State<LoginFormulary> {
                       fontSize: 12,
                       letterSpacing: 2.5),
                 ),
+                 SizedBox(height: responsive.hp(3)),
                 TextFormField(
                   controller: _emailController,
                   decoration: const InputDecoration(label: Text('Mail')),

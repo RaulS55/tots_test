@@ -52,7 +52,7 @@ class _Item extends StatelessWidget {
                   url != null ? NetworkImage(url) : null,
               child: url== null
                   ? Text(
-                      '${client.firstname[0].toUpperCase()}${client.lastname[0].toUpperCase()}',
+                      shortName(),
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -161,6 +161,10 @@ class _Item extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String shortName(){
+    return '${client.firstname.isNotEmpty? client.firstname[0].toUpperCase() : ''}${client.lastname.isNotEmpty? client.lastname[0].toUpperCase() : ''}';
   }
 
   String? validateUrl(String? text) {
