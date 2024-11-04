@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
                       const ClientsList(),
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: responsive.hp(4)),
+                            EdgeInsets.symmetric(vertical: responsive.hp(3.9)),
                         child: CustomButton(
                           text: 'LOAD MORE',
                           onTap: () {},

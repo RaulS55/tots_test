@@ -1,21 +1,21 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  // Crea una instancia del almacenamiento seguro
-  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-
   // Guarda el access token
   Future<void> saveAccessToken(String token) async {
-    await _secureStorage.write(key: 'access_token', value: token);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('access_token', token);
   }
 
   // Lee el access token
   Future<String?> getAccessToken() async {
-    return await _secureStorage.read(key: 'access_token');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('access_token');
   }
 
   // Borra el access token (por ejemplo, al cerrar sesión)
   Future<void> deleteAccessToken() async {
-    await _secureStorage.delete(key: 'access_token');
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('access_token');
   }
 }

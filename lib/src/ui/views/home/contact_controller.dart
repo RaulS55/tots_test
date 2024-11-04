@@ -56,6 +56,7 @@ class ClientController extends ChangeNotifier {
       if (response.isLeft) return;
     
       list = [response.right,...list];
+      fullList = [response.right,...fullList];
       isLoading = false;
       notifyListeners();
     } catch (e) {
@@ -77,10 +78,17 @@ class ClientController extends ChangeNotifier {
       );
 
       List<Client> aux = [...list];
-      final index = list.indexWhere((element) => element.id == client.id);
+      int index = list.indexWhere((element) => element.id == client.id);
       if (index != -1) {
         aux[index] = client;
         list = aux;
+      }
+
+      aux = [...fullList];
+      index = fullList.indexWhere((element) => element.id == client.id);
+      if (index != -1) {
+        aux[index] = client;
+        fullList = aux;
       }
 
       isLoading = false;
@@ -91,6 +99,8 @@ class ClientController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+ 
 
   Future delete(Client client) async {
     String? token = await AuthService().getAccessToken();
@@ -104,5 +114,6 @@ class ClientController extends ChangeNotifier {
     aux.remove(client);
     list = aux;
     notifyListeners();
+    fullList.remove(client);
   }
 }
